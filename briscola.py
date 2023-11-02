@@ -1,309 +1,181 @@
-import random
+from CardGame import CardGame
+from CardGameActions import CardGameActions
 
-card_colors = ["Kreuz", "Pik", "Herz", "Karo"]
-card_values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Bube", "Dame", "König", "Ass"]
-card_points = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-card_rating = [0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 4, 10, 11]
+class Briscola(CardGame):
 
-card_dictionary = {}
-card_deck = []
+    def __init__(self):
+        super().__init__()
+        self.create_briscola_card_dictionary()
+        self.create_card_deck(self.card_dictionary)
 
-player_cards = []
-computer_cards = []
-trump_card = "Herz"
-game_result = [0, 0]
-game_result_points = [0, 0]
+    def create_briscola_card_dictionary(self):
+        self.card_colors = ["Swords", "Cups", "Coins", "Sticks"]
+        self.card_values = ["2", "4", "5", "6", "7", "Jack", "Queen", "King", "Three", "Ace"]
+        self.card_points = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.card_rating = [0, 0, 0, 0, 0, 2, 3, 4, 10, 11]
 
-computers_turn = False
-testing_modus = True
+        for index in range(len(self.card_colors)):
+            for card, point, rating in zip(self.card_values, self.card_points, self.card_rating):
+                self.card_dictionary[self.card_colors[index] + " " + card] = [self.card_colors[index], point, rating]
+        return self.card_dictionary
 
-for index in range(len(card_colors)):
-    for card, point, rating in zip(card_values, card_points, card_rating):
-        card_dictionary[card_colors[index] + " " + card] = [card_colors[index], point, rating]
 
-for item in card_dictionary.keys():
-    card_deck.append(item)
+class BriscolaGameActions(CardGameActions):
 
-def shuffle_cards(cards):
-    print("")
-    print("SHUFFLING CARDS")
-    print("")
+    def __init__(self):
+        super().__init__()
+        self.card_dictionary = Briscola().card_dictionary
+        self.computers_turn = False
+        self.game_result = [0, 0]
+        self.game_result_points = [0, 0]
 
-    shuffled_cards = cards.copy()
-    random.shuffle(shuffled_cards)
-    return shuffled_cards
+    def computer_select_card(self, player_card = None):
 
-def give_out_cards(cards):
-    print("")
-    print("GIVING OUT CARDS")
-    print("")
-    #print(len(player_cards))
-    #print(len(computer_cards))
+        if self.computers_turn == False:
+            played_color = self.card_dictionary[player_card][0]
 
-    while (len(player_cards) != 3) and (len(computer_cards) != 3):
-        give_player = cards.pop()
-        player_cards.append(give_player)
+            #Try to beat player first with color card
+            for card in self.computer_cards:
+                if self.card_dictionary[card][0] == played_color:
+                    if self.card_dictionary[card][1] > self.card_dictionary[player_card][1]:
+                        computer_card = card
+                        #print(f"\tComputer selected card by color: {computer_card}")
+                        self.computer_cards.remove(computer_card)
+                        return computer_card
 
-        give_computer = cards.pop()
-        computer_cards.append(give_computer)
+            #Try to beat player if card is equal to or higher then 10 if he has no trump card
+            if self.card_dictionary[player_card][1] >= 6 and self.card_dictionary[player_card][0] != self.trump_card:
+                for card in self.computer_cards:
+                    if self.card_dictionary[card][0] == self.trump_card:
+                        computer_card = card
+                        #print(f"\tComputer selected card by trump: {computer_card}")
+                        self.computer_cards.remove(computer_card)
+                        return computer_card
 
-    #print("")
-    #print(f"Player has following cards: {player_cards}")
-    #print(f"Computer has following cards: {computer_cards}")
-    #print("")
+            #Try not to play trump card when player is playing a low trump card
+            if self.card_dictionary[player_card][1] <= 6 and self.card_dictionary[player_card][0] == self.trump_card:
+                for card in self.computer_cards:
+                    if self.card_dictionary[card][0] != self.trump_card and self.card_dictionary[card][1] <= 6:
+                        computer_card = card
+                        #print(f"\tComputer selected card lowest non trump card: {computer_card}")
+                        self.computer_cards.remove(computer_card)
+                        return computer_card
 
-def select_trump_card():
-    print("")
-    print("SELECTING TRUMP CARD")
-    print("")
-    while True:
-        try:
-            print(f"\tWhich color do you want to select: {card_colors}")
-            selected_color = input("\t> ")
+            #When not able to beat player by color or trump card
+            computer_card = self.computer_cards[0]
+            #print(f"\tComputer selected lowest card: {computer_card}")
+            self.computer_cards.remove(computer_card)
+            return computer_card
 
-            if selected_color in card_colors:
-                trump_card = selected_color
-                print(f"\tThe trump card is {trump_card}")
-                return trump_card
-            else:
-                print(f"\tThe color {selected_color} is not in your card colors: {card_colors}")
-        except:
-            print("EXCEPTION")
-            break
-
-def player_select_card(player_cards):
-    print("")
-    print("PLAYER SELECTING CARD")
-    print("")
-
-    if testing_modus == True:
-        print("\tTesting the computer with random seletced player cards.")
-        print("")
-        player_card = random.choice(player_cards)
-        player_cards.remove(player_card)
-
-        return(player_card)
-    else:
-        #print("Manual Game Modus")
-
-        while True:
-            try:
-                print(f"\tWhich card do you want to select: {player_cards}")
-                selected_card = input("\t> ")
-
-                if selected_card in player_cards:
-                    player_card = selected_card
-                    player_cards.remove(player_card)
-
-                    #print("")
-                    #print(f"The player selected the card: {player_card}")
-                    #print(f"Remaining player cards: {player_cards}")
-                    #print("")
-
-                    return(player_card)
-
-                else:
-                    print(f"\tThe card {selected_card} is not in your cards: {player_cards}")
-            except:
-                print("EXCEPTION")
-                break
-
-def computer_select_card(computer_cards, player_card = None):
-
-    if computers_turn == False:
-        played_color = card_dictionary[player_card][0]
-        #print(f"Played color: {played_color}")
-
-        #Try to beat player first with color card
-        for card in computer_cards:
-            #print(card_dictionary[card][0])
-            if card_dictionary[card][0] == played_color:
-                if card_dictionary[card][1] > card_dictionary[player_card][1]:
-                    computer_card = card
-                    #print(f"\tComputer selected card by color: {computer_card}")
-                    computer_cards.remove(computer_card)
-                    return computer_card
-
-        #Try to beat player if card is equal to or higher then 10 if he has no trump card
-        if card_dictionary[player_card][1] >= 10 and card_dictionary[player_card][0] != trump_card:
-            for card in computer_cards:
-                #print(card_dictionary[card][0])
-                if card_dictionary[card][0] == trump_card:
-                    computer_card = card
-                    #print(f"\tComputer selected card by trump: {computer_card}")
-                    computer_cards.remove(computer_card)
-                    return computer_card
-
-        #Try not to play trump card when player is playing a low trump card
-        if card_dictionary[player_card][1] <= 10 and card_dictionary[player_card][0] == trump_card:
-            for card in computer_cards:
-                #print(card_dictionary[card][0])
-                if card_dictionary[card][0] != trump_card and card_dictionary[card][1] <= 10:
+        else:
+            #when computer starts try not to play trump card
+            for card in self.computer_cards:
+                if self.card_dictionary[card][0] != self.trump_card and self.card_dictionary[card][1] <= 6:
                     computer_card = card
                     #print(f"\tComputer selected card lowest non trump card: {computer_card}")
-                    computer_cards.remove(computer_card)
+                    self.computer_cards.remove(computer_card)
                     return computer_card
 
-        #When not able to beat player by color or trump card
-        computer_card = computer_cards[0]
-        #print(f"\tComputer selected lowest card: {computer_card}")
-        computer_cards.remove(computer_card)
-        return computer_card
+            #When computer starts play lowest card
+            computer_card = self.computer_cards[0]
+            #print(f"\tComputer selected lowest card: {computer_card}")
+            self.computer_cards.remove(computer_card)
+            return computer_card
 
-    else:
-        #when computer starts try not to play trump card
-        for card in computer_cards:
-            if card_dictionary[card][0] != trump_card and card_dictionary[card][1] <= 10:
-                computer_card = card
-                #print(f"\tComputer selected card lowest non trump card: {computer_card}")
-                computer_cards.remove(computer_card)
-                return computer_card
+    def determine_winner(self, p_card, c_card):
+        print("")
+        print("DETERMINIG WINNER:")
+        print("")
 
-        #When computer starts play lowest card
-        computer_card = computer_cards[0]
-        #print(f"\tComputer selected lowest card: {computer_card}")
-        computer_cards.remove(computer_card)
-        return computer_card
-
-def sort_cards(cards):
-    #print("")
-    #print("SORTING CARDS")
-    #print("")
-
-    #print(f"Cards before sorting: {cards}")
-
-    sorted_cards = []
-    sorted_dictionary = sorted(card_dictionary.items(), key=lambda x:x[1][1])
-
-    for item in sorted_dictionary:
-        if item[0] in cards:
-            sorted_cards.append(item[0])
-
-    #print(f"Cards after sorting: {sorted_cards}")
-
-    return sorted_cards
-
-def determine_winner(p_card, c_card, c_turn):
-    print("")
-    print("DETERMINIG WINNER:")
-    print("")
-
-    if card_dictionary[p_card][0] == trump_card and card_dictionary[c_card][0] != trump_card:
-        print("\tPLAYER WON with trump card")
-        game_result[0] += 1
-        game_result_points[0] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-        c_turn = False
-    elif card_dictionary[p_card][0] != trump_card and card_dictionary[c_card][0] == trump_card:
-        print("\tCOMPUTER WON with trump card")
-        game_result[1] += 1
-        game_result_points[1] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-        c_turn = True
-    elif c_turn == False and card_dictionary[c_card][0] != card_dictionary[p_card][0]:
-        print("\tPLAYER WON with colour")
-        game_result[0] += 1
-        game_result_points[0] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-        c_turn = False
-    elif c_turn == True and card_dictionary[c_card][0] != card_dictionary[p_card][0]:
-        print("\tCOMPUTER WON with colour")
-        game_result[1] += 1
-        game_result_points[1] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-        c_turn = True
-    elif card_dictionary[p_card][0] == card_dictionary[c_card][0]:
-        if card_dictionary[p_card][1] > card_dictionary[c_card][1]:
-            print("\tPLAYER WON with higher card")
-            game_result[0] += 1
-            game_result_points[0] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-            c_turn = False
+        if self.card_dictionary[p_card][0] == self.trump_card and self.card_dictionary[c_card][0] != self.trump_card:
+            print("\tPLAYER WON with trump card")
+            self.computers_turn = False
+        elif self.card_dictionary[p_card][0] != self.trump_card and self.card_dictionary[c_card][0] == self.trump_card:
+            print("\tCOMPUTER WON with trump card")
+            self.computers_turn = True
+        elif self.computers_turn == False and self.card_dictionary[c_card][0] != self.card_dictionary[p_card][0]:
+            print("\tPLAYER WON with colour")
+            self.computers_turn = False
+        elif self.computers_turn == True and self.card_dictionary[c_card][0] != self.card_dictionary[p_card][0]:
+            print("\tCOMPUTER WON with colour")
+            self.computers_turn = True
+        elif self.card_dictionary[p_card][0] == self.card_dictionary[c_card][0]:
+            if self.card_dictionary[p_card][1] > self.card_dictionary[c_card][1]:
+                print("\tPLAYER WON with higher card")
+                self.computers_turn = False
+            else:
+                print("\tCOMPUTER WON with higher card")
+                self.computers_turn = True
         else:
-            print("\tCOMPUTER WON with higher card")
-            game_result[1] += 1
-            game_result_points[1] += (card_dictionary[p_card][2] + card_dictionary[c_card][2])
-            c_turn = True
-    else:
-        print("### - ERROR - ###")
+            print("### - ERROR - ###")
 
-    print("")
-    print(f"\tPlayer Card: {p_card}\n\tComputer Card: {c_card}")
-    print("")
-    print(f"\tPlayer won rounds: {game_result[0]} - Computer won rounds: {game_result[1]}")
-    print(f"\tPlayer points: {game_result_points[0]} - Computer points: {game_result_points[1]}")
-    print("")
-    print("\t----------------------------------------")
-
-
-    return c_turn
-
-
-### MAIN GAME ###
-
-
-playing_cards = shuffle_cards(card_deck)
-#playing_cards = playing_cards[:8]
-
-#print("")
-#print("Those are the cards after shuffling:")
-#print(playing_cards)
-
-trump_card = select_trump_card()
-
-while (len(playing_cards) != 0) or (len(player_cards) > 0):
-
-    if len(playing_cards) > 0:
-        give_out_cards(playing_cards)
-
-    print(f"\tRemaining cards to give out: {len(playing_cards)}")
-    print("")
-
-    if computers_turn == False:
-        print("")
-        print("PLAYERS TURN")
-        print("")
-
-        player_selected_card = player_select_card(player_cards)
+        if self.computers_turn == False:
+            print("\tPLAYER getting the points")
+            self.game_result[0] += 1
+            self.game_result_points[0] += (self.card_dictionary[p_card][2] + self.card_dictionary[c_card][2])
+        elif self.computers_turn == True:
+            print("\tCOMPUTER getting the points")
+            self.game_result[1] += 1
+            self.game_result_points[1] += (self.card_dictionary[p_card][2] + self.card_dictionary[c_card][2])
+        else:
+            print("### - ERROR - ###")
 
         print("")
-        print(f"\tPLAYER SELECTED CARD: {player_selected_card}")
-        print(f"\tRemaining player cards: {player_cards}")
+        print(f"\tPlayer Card: {p_card}\n\tComputer Card: {c_card}")
         print("")
+        print(f"\tPlayer won rounds: {self.game_result[0]} - Computer won rounds: {self.game_result[1]}")
+        print(f"\tPlayer points: {self.game_result_points[0]} - Computer points: {self.game_result_points[1]}")
+        print("")
+        print("\t----------------------------------------")
 
-        print("")
-        print("COMPUTER REACTING")
-        computer_cards = sort_cards(computer_cards)
 
-        computer_selected_card = computer_select_card(computer_cards, player_selected_card)
+        return self.computers_turn
 
-        print("")
-        print(f"\tCOMPUTER SELECTED CARD: {computer_selected_card}")
-        #print(f"Remaining computer cards: {computer_cards}")
-        print("")
+    def overall_result(self):
+        pass
 
-        computers_turn = determine_winner(player_selected_card, computer_selected_card, computers_turn)
+    def play_game(self):
+        playing_cards = Briscola().shuffle_cards(Briscola().card_deck)
+        self.select_trump_card(Briscola().card_colors)
 
-    else:
-        print("")
-        print("COMPUTERS TURN")
-        print("")
+        while (len(playing_cards) != 0) or (len(self.player_cards) > 0):
+            if len(playing_cards) > 0:
+                self.give_out_cards(playing_cards)
 
-        print("")
-        #print("The computer is sorting his cards")
-        computer_cards = sort_cards(computer_cards)
+            print(f"\tRemaining cards to give out: {len(playing_cards)}")
 
-        computer_selected_card = computer_select_card(computer_cards)
+            if self.computers_turn == False:
+                print("")
+                print("PLAYER IS STARTING")
+                player_selected_card = self.player_select_card()
 
-        print("")
-        print(f"\tCOMPUTER SELECTED CARD: {computer_selected_card}")
-        #print(f"Remaining computer cards: {computer_cards}")
-        print("")
+                print("")
+                print("COMPUTER REACTING")
+                self.computer_cards = self.sort_cards(self.computer_cards, self.card_dictionary)
+                computer_selected_card = self.computer_select_card(player_selected_card)
+                print("")
+                print(f"\tCOMPUTER SELECTED CARD: {computer_selected_card}")
 
-        print("")
-        print("PLAYERS TURN")
-        print("")
+                self.computers_turn = self.determine_winner(player_selected_card, computer_selected_card)
 
-        player_selected_card = player_select_card(player_cards)
+            else:
+                print("")
+                print("COMPUTER IS STARTING")
+                self.computer_cards = self.sort_cards(self.computer_cards, self.card_dictionary)
+                computer_selected_card = self.computer_select_card()
+                print("")
+                print(f"\tCOMPUTER SELECTED CARD: {computer_selected_card}")
 
-        print("")
-        print(f"PLAYER SELECTED CARD: {player_selected_card}")
-        print(f"Remaining player cards: {player_cards}")
-        print("")
+                print("")
+                print("PLAYERS TURN")
+                player_selected_card = self.player_select_card()
 
-        computers_turn = determine_winner(player_selected_card, computer_selected_card, computers_turn)
+                self.computers_turn = self.determine_winner(player_selected_card, computer_selected_card)
+
+
+if __name__ == "__main__":
+    print("TESTING THE CODE")
+
+    test = Briscola()
+    test.print_card_dictionary()
+    print(test.card_deck)
