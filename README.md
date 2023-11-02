@@ -40,7 +40,7 @@ The starting player is choosing a trump card.
 
 
 
-![alt text](/flow-chart-briscola_v1.jpg)
+![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/main/flow-chart-briscola_v1.jpeg)
 
 The goal of each trick is to capture the highest-value card in the trick, as determined by a specific ranking of the cards. The ranking is as follows, from highest to lowest:
     3 points: The highest-ranked card is the "Briscola," which is the card of the same suit as the face-up card in the discard pile.
