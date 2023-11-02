@@ -131,9 +131,6 @@ class BriscolaGameActions(CardGameActions):
 
         return self.computers_turn
 
-    def overall_result(self):
-        pass
-
     def play_game(self):
         playing_cards = Briscola().shuffle_cards(Briscola().card_deck)
         self.select_trump_card(Briscola().card_colors)
