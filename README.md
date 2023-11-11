@@ -25,7 +25,7 @@ Ace, three, king, queen, jack, 7, 6, 5, 4, 2
 | Queen 	| 3 points |
 | Jack 	| 2 points |
 
-A maximum of 120 can be achieved.
+A maximum of points 120 can be achieved.
 
 ### Gameplay:
 
