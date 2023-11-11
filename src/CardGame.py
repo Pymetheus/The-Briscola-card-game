@@ -7,8 +7,8 @@ class CardGame(object):
         self.card_deck = []
 
     def print_card_dictionary(self):
-        for item, key in zip(self.card_dictionary.keys(), self.card_dictionary.values()):
-            print(item, key)
+        for key, value in self.card_dictionary.items():
+            print(key, value)
 
     def create_card_deck(self, card_dictionary):
         for item in card_dictionary.keys():
