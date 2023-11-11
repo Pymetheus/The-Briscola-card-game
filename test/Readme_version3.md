@@ -41,7 +41,7 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 
 ### How to Play
 
-1. Start the game by running `main.py`:
+1. Start the game by running main.py:
 `python main.py`
 
 2. Follow the on-screen instructions to select the trump card and play the game.
@@ -56,13 +56,13 @@ Briscola is a trick-taking card game where players aim to score points by winnin
 - The traditional Italian deck consists of four suits: Swords, Cups, Coins and Sticks
 - Each suit has ten cards, given from highest to lowest: Ace, three, king, queen, jack, 7, 6, 5, 4, 2
 
-| Name | Points |
-| ----------- | ----------- |
-| Ace 	| 11 points |
-| Three 	| 10 points |
-| King 	| 4 points |
-| Queen 	| 3 points |
-| Jack 	| 2 points |
+  | Name | Points |
+  | ----------- | ----------- |
+  | Ace 	| 11 points |
+  | Three 	| 10 points |
+  | King 	| 4 points |
+  | Queen 	| 3 points |
+  | Jack 	| 2 points |
 
 ### Game play:
 - Players are dealt a hand of three cards.
@@ -73,10 +73,12 @@ Briscola is a trick-taking card game where players aim to score points by winnin
 - After all the tricks have been played, players count the points they have captured in the tricks.
 - A maximum of points 120 can be achieved.
 
+![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/res/flow-chart-briscola_v1.jpeg)
+
 ## Contributing
 
 Contributions to this project are welcome! If you would like to contribute, please open an issue to discuss potential changes or submit a pull request.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this code as permitted by the license.
+This project is licensed under the [MIT License](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/src/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
