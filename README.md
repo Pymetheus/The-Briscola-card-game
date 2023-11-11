@@ -82,7 +82,7 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 - A maximum of 120 points can be achieved.
 
 
-![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/res/flow-chart-briscola_v2.jpeg)
+![Flow Chart](res\flow-chart-gameplay.jpeg)
 
 
 ## Contributing
