@@ -32,13 +32,13 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-username/briscola-card-game.git
+    git clone https://github.com/Pymetheus/The-Briscola-card-game.git
     ```
 
 2. Change into the project directory:
 
     ```bash
-    cd briscola-card-game
+    cd The-Briscola-card-game
     ```
 
 ### How to Play
