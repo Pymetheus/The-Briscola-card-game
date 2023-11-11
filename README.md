@@ -12,15 +12,10 @@ The objective of Briscola is to earn points by winning tricks and capturing spec
 
 ### Setup:
 The traditional Italian deck consists of four suits:
--Swords
--Cups
--Coins
--Sticks
+Swords, Cups, Coins and Sticks
 
 Each suit has ten cards, given from highest to lowest:
-Ace, three, king, queen, jack, 7, 6, 5, 4, 2.
-
-Also, the cards have a point value:
+Ace, three, king, queen, jack, 7, 6, 5, 4, 2
 
 | Name | Points |
 | ----------- | ----------- |

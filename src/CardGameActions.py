@@ -22,8 +22,8 @@ class CardGameActions(object):
             self.computer_cards.append(give_computer)
 
         #print("")
-        #print(f"Player has following cards: {player_cards}")
-        #print(f"Computer has following cards: {computer_cards}")
+        #print(f"Player has following cards: {self.player_cards}")
+        #print(f"Computer has following cards: {self.computer_cards}")
         #print("")
 
     def select_trump_card(self, card_colors):
@@ -82,7 +82,7 @@ class CardGameActions(object):
                         return player_card
 
                     else:
-                        print(f"\tThe card {selected_card} is not in your cards: {player_cards}")
+                        print(f"\tThe card {selected_card} is not in your cards: {self.player_cards}")
                 except:
                     print("EXCEPTION")
                     break
