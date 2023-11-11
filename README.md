@@ -89,4 +89,4 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/src/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
+This project is licensed under the [MIT License](/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
