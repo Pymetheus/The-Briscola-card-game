@@ -1,62 +1,92 @@
 # The Briscola Card Game
-Briscola is a captivating Italian trick-taking card game that masterfully blends strategy, skill, and heart-pounding competition, offering an exhilarating and challenging gaming experience for those seeking an exciting pastime.
 
+![Briscola Card Game](briscola.png)
 
-## **About**
-Introducing a Python implementation of the classic Italian card game, Briscola, where you can now challenge your skills against a computer opponent. Immerse yourself in the world of strategy and excitement as you strive to secure valuable cards and execute winning moves, all while competing against a computer adversary that will put your gaming abilities to the test. Whether you're a seasoned player or new to the game, this Python Briscola experience offers engaging and entertaining gameplay for hours of fun and challenge.
+Introducing a Python implementation of the classic Italian trick-taking card game, Briscola, where you can now challenge your skills against a computer opponent. Immerse yourself in the world of strategy and excitement as you strive to secure valuable cards and execute winning moves, all while competing against a computer adversary that will put your gaming abilities to the test. Whether you're a seasoned player or new to the game, this Python Briscola experience offers engaging and entertaining game play for hours of fun and challenge.
 
+## Table of Contents
 
-## **Rules**
-### Objective:
-The objective of Briscola is to earn points by winning tricks and capturing specific cards.
+- [Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [How to Play](#how-to-play)
+- [Game Rules](#game-rules)
+  - [Setup](#setup)
+  - [Gameplay](#gameplay)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Setup:
-The traditional Italian deck consists of four suits:
-Swords, Cups, Coins and Sticks
+## Features
 
-Each suit has ten cards, given from highest to lowest:
-Ace, three, king, queen, jack, 7, 6, 5, 4, 2
+- Implements the Briscola card game in Python.
+- Supports an intelligent computer-controlled opponent.
+- Simple command-line interface for playing the game.
 
-| Name | Points |
-| ----------- | ----------- |
-| Ace 	| 11 points |
-| Three 	| 10 points |
-| King 	| 4 points |
-| Queen 	| 3 points |
-| Jack 	| 2 points |
+## Requirements
 
-A maximum of points 120 can be achieved.
+- Python 3.x
 
-### Gameplay:
+## Getting Started
 
-The cards are shuffled, and each player receives three cards.
+### Installation
 
-The starting player is choosing a trump card.
+1. Clone the repository to your local machine:
 
+    ```bash
+    git clone https://github.com/your-username/briscola-card-game.git
+    ```
 
+2. Change into the project directory:
 
-![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/main/flow-chart-briscola_v1.jpeg)
+    ```bash
+    cd briscola-card-game
+    ```
 
-The goal of each trick is to capture the highest-value card in the trick, as determined by a specific ranking of the cards. The ranking is as follows, from highest to lowest:
-    3 points: The highest-ranked card is the "Briscola," which is the card of the same suit as the face-up card in the discard pile.
-    10 points: The King.
-    9 points: The Horse (Cavallo).
-    8 points: The Jack (Fante).
-    7 points: All other numbered cards.
-    1 point: The lowest-ranked card is the 7.
+### How to Play
 
-Players must follow suit, playing a card of the same suit as the leading card if they have one. If they don't have a card of the same suit, they can play any other card.
+1. Start the game by running `main.py`:
 
-The player who wins the trick leads the next trick.
+    ```bash
+    python main.py
+    ```
 
-After all the tricks have been played, players count the points they have captured in the tricks.
+2. Follow the on-screen instructions to select the trump card and play the game.
 
-In addition to the card points, there are additional points available for "scoperte" (capturing specific combinations of cards, such as the highest-value card from each suit). These combinations vary by region and house rules.
+3. Enjoy playing Briscola!
 
-Winning:
-The game is typically played to a specific point total, such as 21 or 31 points. The first player or team to reach this total wins the game.
+## Game Rules
 
-Variations:
-There are many regional variations of Briscola, and the rules may differ slightly depending on where it is played. Some variations include different scoring systems, the use of wild cards, and different point thresholds for winning.
+### Setup
 
-Briscola is a classic and strategic Italian card game that combines skill, strategy, and a bit of luck, making it a beloved pastime for players of all ages.
+- The game is played with a standard Italian deck of 40 cards.
+- The traditional Italian deck consists of four suits: Swords, Cups, Coins, and Sticks.
+- Each suit has ten cards, given from highest to lowest: Ace, three, king, queen, jack, 7, 6, 5, 4, 2.
+
+  | Name   | Points   |
+  | ------ | -------- |
+  | Ace    | 11 points |
+  | Three  | 10 points |
+  | King   | 4 points  |
+  | Queen  | 3 points  |
+  | Jack   | 2 points  |
+
+### Gameplay
+
+- Each player is dealt a hand of three cards.
+- The starting player selects one suit as the "trump" suit, which ranks higher than other suits for the rest of the game.
+- Players take turns playing a card, and the player with the higher-ranking card in the same suit wins the trick.
+- If a player plays a trump card, it beats all other suits.
+- The player who wins the trick leads the next trick.
+- After all tricks have been played, players count the points they have captured in the tricks.
+- A maximum of 120 points can be achieved.
+
+![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/res/flow-chart-briscola_v2.jpeg)
+
+## Contributing
+
+Contributions to this project are welcome! If you would like to contribute, please open an issue to discuss potential changes or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/src/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
