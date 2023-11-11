@@ -1,1 +1,1 @@
-Update Info about resources
+Lorem ipsum

@@ -1,7 +1,5 @@
 # The Briscola Card Game
 
-![Briscola Card Game](briscola.png)
-
 Introducing a Python implementation of the classic Italian trick-taking card game, Briscola, where you can now challenge your skills against a computer opponent. Immerse yourself in the world of strategy and excitement as you strive to secure valuable cards and execute winning moves, all while competing against a computer adversary that will put your gaming abilities to the test. Whether you're a seasoned player or new to the game, this Python Briscola experience offers engaging and entertaining game play for hours of fun and challenge.
 
 ## Table of Contents
@@ -34,13 +32,13 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-username/briscola-card-game.git
+    git clone https://github.com/Pymetheus/The-Briscola-card-game.git
     ```
 
 2. Change into the project directory:
 
     ```bash
-    cd briscola-card-game
+    cd The-Briscola-card-game
     ```
 
 ### How to Play
@@ -82,7 +80,7 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 - A maximum of 120 points can be achieved.
 
 
-![Flow Chart](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/res/flow-chart-briscola_v2.jpeg)
+![Flow Chart](res/flow-chart-gameplay.jpeg)
 
 
 ## Contributing
@@ -91,4 +89,4 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/Pymetheus/The-Briscola-card-game/blob/update-main/src/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
+This project is licensed under the [MIT License](/LICENSE.md). You are free to use, modify, and distribute this code as permitted by the license.
