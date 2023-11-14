@@ -2,6 +2,8 @@
 
 Introducing a Python implementation of the classic Italian trick-taking card game, Briscola, where you can now challenge your skills against a computer opponent. Immerse yourself in the world of strategy and excitement as you strive to secure valuable cards and execute winning moves, all while competing against a computer adversary that will put your gaming abilities to the test. Whether you're a seasoned player or new to the game, this Python Briscola experience offers engaging and entertaining game play for hours of fun and challenge.
 
+![Briscola](res/header-briscola.png)
+
 ## Table of Contents
 
 - [Features](#features)
