@@ -168,11 +168,3 @@ class BriscolaGameActions(CardGameActions):
                 player_selected_card = self.player_select_card()
 
                 self.computers_turn = self.determine_winner(player_selected_card, computer_selected_card)
-
-
-if __name__ == "__main__":
-    print("TESTING THE CODE")
-
-    test = Briscola()
-    test.print_card_dictionary()
-    print(test.card_deck)
