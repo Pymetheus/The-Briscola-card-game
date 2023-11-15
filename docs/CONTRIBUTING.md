@@ -17,4 +17,4 @@
 
 #### **Do you have questions about the source code?**
 
-* Ask any question about how to use The Briscola Card Game by [Mail](github.senate902@passfwd.com).
+* Ask any question about how to use The Briscola Card Game by [Email](mailto:github.senate902@passfwd.com).
