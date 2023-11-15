@@ -88,7 +88,7 @@ Introducing a Python implementation of the classic Italian trick-taking card gam
 ## Contributing
 
 Contributions to this project are welcome! If you would like to contribute, please open an issue to discuss potential changes or submit a pull request.
-For more details please visit the [contribute page](docs/CONTRIBUTING.md)
+For more details please visit the [contributing page](docs/CONTRIBUTING.md)
 
 ## License
 
